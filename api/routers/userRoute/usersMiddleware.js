@@ -17,21 +17,23 @@ const valRegister = (req, res, next) => {
   }
 };
 
-const usernameFree = async (req,res,next) => {
-    const {username} = req.body
-    try{
-        const user = await getResByFilter('users', {username:username})
-        if (user){
-            res.status(400).json({message:"username is not available"})
-        }
-        else{
-            next()
-        }
-        
+const usernameFree = async (req, res, next) => {
+  const { username } = req.body;
+  try {
+    const user = await getResByFilter("users", { username: username });
+    if (user.length >= 1) {
+      res.status(400).json({ message: "username is not available" });
+    } else {
+      next();
     }
-    catch(err){
-        res.status(500).json({message:'there was an error while checking to see if that username was available'})
-    }
-}
+  } catch (err) {
+    res
+      .status(500)
+      .json({
+        message:
+          "there was an error while checking to see if that username was available",
+      });
+  }
+};
 
-module.exports = { hashPass, valRegister,usernameFree };
+module.exports = { hashPass, valRegister, usernameFree };
