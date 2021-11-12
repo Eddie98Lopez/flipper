@@ -22,16 +22,6 @@ server.use(express.json())
 server.use(helmet())
 server.use(cors())
 
-server.use('/api/users', usersRoute)
+server.use('/api/auth', usersRoute)
 
-//server.use('/users',userRoutes)
-
-/* server.get('/api/users', async (req, res) => {
-  res.json(await getAllUsers())
-})
-
-server.post('/api/users', async (req, res) => {
-  res.status(201).json(await insertUser(req.body))
-})
- */
 module.exports = server

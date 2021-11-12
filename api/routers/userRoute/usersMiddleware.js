@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const { getResByFilter } = require("../../models/dbHelpers");
 
 /* For registration the function below jumbles and encrypts the user's 
@@ -39,4 +40,58 @@ const usernameFree = async (req, res, next) => {
   }
 };
 
-module.exports = { hashPass, valRegister, usernameFree };
+const valLogin = (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    res.status(400).json({ message: "all fields required" });
+  } else {
+    next();
+  }
+};
+
+const checkUserExist = async (req, res, next) => {
+  try {
+    const user = await getResByFilter("users", { username: req.body.username });
+    if (user.length === 0) {
+      res.status(400).json({ message: "username does not exist" });
+    } else {
+      req.user = user[0];
+      next();
+    }
+  } catch (err) {
+    res.status(500).json("check user exists error");
+  }
+};
+
+const checkPass = (req, res, next) => {
+  const hash = req.user.password;
+  const { password } = req.body;
+  if (bcrypt.compareSync(password, hash) === true) {
+    req.passCheck = true;
+    next();
+  } else {
+    res.status(403).json({ message: "invalid credentials" });
+  }
+};
+
+const generateToken = (user, secret) => {
+  const payload = {
+    subject: user.user_id,
+    username: user.username,
+  };
+  const options = {
+    expiresIn: "1d",
+  };
+
+  return jwt.sign(payload, secret, options);
+};
+
+module.exports = {
+  hashPass,
+  valRegister,
+  usernameFree,
+  checkUserExist,
+  checkPass,
+  valLogin,
+  generateToken,
+};
