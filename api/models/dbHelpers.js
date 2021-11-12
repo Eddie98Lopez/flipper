@@ -1,6 +1,6 @@
 const db = require("../data/db-config");
 
-const getResource = (table) => {
+const getResources = (table) => {
   return db(table);
 };
 
@@ -22,4 +22,4 @@ const addResource = async (table, resource) => {
   return await getResourceById(table, id);
 };
 
-module.exports = {getResource,getResByFilter, getResourceById, addResource}
+module.exports = {getResources,getResByFilter, getResourceById, addResource}
