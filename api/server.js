@@ -2,7 +2,7 @@ const express = require('express')
 const helmet = require('helmet')
 const cors = require('cors')
 
-const usersRoute = require('./routers/userRoutes')
+const usersRoute = require('./routers/userRoute/userRoutes')
 //const db = require('./data/db-config')
 
 //const userRoutes = require('./users/userRoutes')

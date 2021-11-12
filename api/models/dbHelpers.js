@@ -19,7 +19,8 @@ const getResByFilter = (table, filter) => {
 const addResource = async (table, resource) => {
   const table_id = `${table.slice(0, table.length - 1)}_id`;
   const [id] = await db(table).insert(resource).returning(table_id);
-  return getResourceById(table, id);
+  const added = await getResourceById(table, id);
+  return added
 };
 
 module.exports = {getResources,getResByFilter, getResourceById, addResource}

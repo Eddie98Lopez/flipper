@@ -1,5 +1,6 @@
 const express = require("express");
-const { getResources, addResource } = require("../models/dbHelpers");
+const { getResources, addResource } = require("../../models/dbHelpers");
+const bcrypt = require("bcryptjs");
 const router = express.Router();
 
 // middleware for validation
@@ -27,12 +28,17 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    console.log(req.body)
+  const { password } = req.body;
+  const hash = bcrypt.hashSync(password, 12);
+  const resource = { ...req.body, password: hash };
+
   try {
-    const newUser = await addResource("users", req.body);
+    const newUser = await addResource("users", resource);
     res.status(200).json(newUser);
   } catch (error) {
     res.status(500).json({ ...error });
   }
 });
+
+
 module.exports = router;
