@@ -1,7 +1,6 @@
 const express = require("express");
 const { getResources, addResource } = require("../../models/dbHelpers");
-//const bcrypt = require("bcryptjs");
-const {hashPass} = require('./usersMiddleware')
+const {hashPass,valRegister, usernameFree} = require('./usersMiddleware')
 const router = express.Router();
 
 // middleware for validation
@@ -28,7 +27,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", hashPass, async (req, res) => {
+router.post("/", valRegister, usernameFree, hashPass, async (req, res) => {
   try {
     const newUser = await addResource("users", req.newUser);
     res.status(200).json(newUser);
