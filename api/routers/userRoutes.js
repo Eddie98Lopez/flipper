@@ -27,6 +27,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+    console.log(req.body)
   try {
     const newUser = await addResource("users", req.body);
     res.status(200).json(newUser);

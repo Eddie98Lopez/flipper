@@ -1,6 +1,8 @@
 const express = require('express')
 const helmet = require('helmet')
 const cors = require('cors')
+
+const usersRoute = require('./routers/userRoutes')
 //const db = require('./data/db-config')
 
 //const userRoutes = require('./users/userRoutes')
@@ -19,6 +21,8 @@ const server = express()
 server.use(express.json())
 server.use(helmet())
 server.use(cors())
+
+server.use('/api/users', usersRoute)
 
 //server.use('/users',userRoutes)
 
