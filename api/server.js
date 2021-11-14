@@ -2,7 +2,7 @@ const express = require('express')
 const helmet = require('helmet')
 const cors = require('cors')
 
-const usersRoute = require('./routers/userRoute/userRoutes')
+const {usersRoute, homeRoute} = require('./routers')
 //const db = require('./data/db-config')
 
 //const userRoutes = require('./users/userRoutes')
@@ -23,5 +23,6 @@ server.use(helmet())
 server.use(cors())
 
 server.use('/api/auth', usersRoute)
+server.use('/api/homes', homeRoute)
 
 module.exports = server
