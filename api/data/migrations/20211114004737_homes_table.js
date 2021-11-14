@@ -11,6 +11,7 @@ exports.up = async function (knex) {
       .references("status_id")
       .inTable("statuses")
       .defaultTo(1);
+    homes.timestamps(false,true)
   });
 };
 
