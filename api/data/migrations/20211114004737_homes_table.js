@@ -5,7 +5,7 @@ exports.up = async function (knex) {
     homes.string("address", 200).notNullable();
     homes.string("city", 200).notNullable();
     homes.integer("postal_code").notNullable();
-    homes.string("notes");
+    homes.string("notes",1000);
     homes
       .integer("status_id")
       .references("status_id")
