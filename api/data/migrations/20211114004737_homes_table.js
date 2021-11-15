@@ -8,9 +8,12 @@ exports.up = async function (knex) {
     homes.string("notes",1000);
     homes
       .integer("status_id")
+      .unsigned()
+      .notNullable()
+      .defaultTo(1)
       .references("status_id")
       .inTable("statuses")
-      .defaultTo(1);
+      .onDelete('RESTRICT')
     homes.timestamps(false,true)
   });
 };
