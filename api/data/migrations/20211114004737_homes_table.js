@@ -13,7 +13,7 @@ exports.up = async function (knex) {
       .defaultTo(1)
       .references("status_id")
       .inTable("statuses")
-      .onDelete('RESTRICT')
+      .onDelete('CASCADE')
     homes.timestamps(false,true)
     homes.boolean('favorite').defaultTo(false)
     homes.integer('purchase_price').nullable()
