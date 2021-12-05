@@ -1,15 +1,5 @@
 exports.up = async function (knex) {
-  await knex.schema.createTable("images", (images) => {
-    images.increments("image_id");
-    images
-      .integer("home_id")
-      .unsigned()
-      .notNullable()
-      .references("home_id")
-      .inTable("homes")
-      .onDelete("RESTRICT");
-    images.binary("image").notNullable();
-  });
+
 
   await knex.schema.createTable("repairs", (repairs) => {
     repairs.increments("repair_id");
@@ -36,5 +26,5 @@ exports.up = async function (knex) {
 
 exports.down = async function (knex) {
   await knex.schema.dropTableIfExists("repairs");
-  await knex.schema.dropTableIfExists("images");
+
 };
