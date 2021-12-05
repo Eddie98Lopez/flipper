@@ -15,7 +15,6 @@ exports.up = async function (knex) {
       .inTable("statuses")
       .onDelete('CASCADE')
     homes.timestamps(false,true)
-    homes.boolean('favorite').defaultTo(false)
     homes.integer('purchase_price').nullable()
     homes.integer('sale_price').nullable()
     homes.integer('repair_estimate').nullable()
