@@ -32,10 +32,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
-  const id = req.params.id;
+router.get("/:home_id", async (req, res) => {
+  const home_id = req.params.home_id;
   try {
-    const home = await getResourceById("homes", id);
+    const home = await getResourceById("homes", home_id);
     console.log(home);
     res.status(200).json(home);
   } catch (error) {
