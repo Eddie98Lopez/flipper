@@ -27,7 +27,7 @@ const addResource = async (table, resource) => {
   return added
  }
  catch(error){
-   res.status(500).json('was not added')
+   res.status(500).json(`resource was not added to ${table} table`)
  }
 };
 
