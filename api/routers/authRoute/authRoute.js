@@ -9,7 +9,7 @@ const {
   checkPass,
   valLogin,
   generateToken,
-} = require("./usersMiddleware");
+} = require("./authMiddleware");
 const router = express.Router();
 
 // middleware for validation

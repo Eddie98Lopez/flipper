@@ -3,7 +3,7 @@ const helmet = require('helmet')
 const cors = require('cors')
 const restricted = require('./restricted')
 
-const {usersRoute, homeRoute} = require('./routers')
+const {authRoute, homeRoute, userRoute} = require('./routers')
 //const db = require('./data/db-config')
 
 //const userRoutes = require('./users/userRoutes')
@@ -23,7 +23,8 @@ server.use(express.json())
 server.use(helmet())
 server.use(cors())
 
-server.use('/api/auth', usersRoute)
+server.use('/api/auth', authRoute)
+server.use('/api/users', restricted, userRoute)
 server.use('/api/homes',restricted, homeRoute)
 
 module.exports = server
