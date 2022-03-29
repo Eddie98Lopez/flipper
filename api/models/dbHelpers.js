@@ -1,3 +1,4 @@
+const res = require("express/lib/response");
 const db = require("../data/db-config");
 
 const getResources = (table) => {
@@ -18,9 +19,16 @@ const getResByFilter = (table, filter) => {
 
 const addResource = async (table, resource) => {
   const table_id = `${table.slice(0, table.length - 1)}_id`;
+ try{
+   console.log(table)
+   console.log(table_id)
   const [id] = await db(table).insert(resource).returning(table_id);
   const added = await getResourceById(table, id);
   return added
+ }
+ catch(error){
+   res.status(500).json('was not added')
+ }
 };
 
 module.exports = {getResources,getResByFilter, getResourceById, addResource}

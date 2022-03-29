@@ -1,4 +1,5 @@
 const express = require("express");
+//const restricted = require('../../restricted')
 const { getResources, addResource } = require("../../models/dbHelpers");
 const {
   hashPass,

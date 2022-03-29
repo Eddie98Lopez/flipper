@@ -33,7 +33,7 @@ const usernameFree = async (req, res, next) => {
       next();
     }
   } catch (err) {
-    res.status(500).json({
+    res.status(500).send({
       message:
         "there was an error while checking to see if that username was available",
     });
@@ -43,7 +43,7 @@ const usernameFree = async (req, res, next) => {
 const valLogin = (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
-    res.status(400).json({ message: "all fields required" });
+    res.status(400).send({ message: "all fields required" });
   } else {
     next();
   }
@@ -53,13 +53,13 @@ const checkUserExist = async (req, res, next) => {
   try {
     const user = await getResByFilter("users", { username: req.body.username });
     if (user.length === 0) {
-      res.status(400).json({ message: "username does not exist" });
+      res.status(400).send({ message: "Invalid username or password" });
     } else {
       req.user = user[0];
       next();
     }
   } catch (err) {
-    res.status(500).json("check user exists error");
+    res.status(500).send({message:"check user exists error"});
   }
 };
 
@@ -70,7 +70,8 @@ const checkPass = (req, res, next) => {
     req.passCheck = true;
     next();
   } else {
-    res.status(403).json({ message: "invalid credentials" });
+    res.status(403).send({message:'Invalid username or password'})
+   
   }
 };
 
