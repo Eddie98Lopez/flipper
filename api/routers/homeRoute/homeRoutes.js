@@ -45,6 +45,7 @@ router.get("/:home_id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
+    console.log(req.body)
     const homes = await addResource("homes", req.body);
     res.status(200).json(homes);
   } catch (error) {
