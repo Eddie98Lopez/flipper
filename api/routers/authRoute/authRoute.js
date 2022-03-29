@@ -1,6 +1,6 @@
 const express = require("express");
 //const restricted = require('../../restricted')
-const { getResources, addResource } = require("../../models/dbHelpers");
+const { addResource } = require("../../models/dbHelpers");
 const {
   hashPass,
   valRegister,
@@ -26,16 +26,6 @@ const router = express.Router();
 
 "/" => get, post
 "/id" => get, put, delete */
-
-router.get("/users", async (req, res) => {
-  try {
-    const users = await getResources("users");
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json({ ...error });
-  }
-});
-
 router.post(
   "/register",
   valRegister,
