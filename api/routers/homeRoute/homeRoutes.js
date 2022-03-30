@@ -5,6 +5,7 @@ const {
   addResource,
 } = require("../../models/dbHelpers");
 const router = express.Router();
+const {valHomeFields} = require('./homeMiddleware')
 /*
 //middleware for validation
 //helper functions to interact with database
@@ -43,7 +44,7 @@ router.get("/:home_id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", valHomeFields,async (req, res) => {
   try {
     console.log(req.body)
     const homes = await addResource("homes", req.body);
